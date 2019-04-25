@@ -1,0 +1,129 @@
+﻿body {
+        background-color: #fff;
+    font-family: "Open Sans", Arial, sans-serif;
+    font-weight:500;
+    color:white;
+}
+.nvbr
+{
+ border-radius:0px;
+ margin-bottom:0px;
+ background-color:black;
+ 
+}
+
+.navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:focus{
+    color:#b5e61d;
+}
+.navbar-inverse .navbar-nav >a:hover
+{
+   color:#b5e61d;
+}
+.myColor{
+    border-color:black;
+}
+.myColor:hover{
+    background-color:black;
+}
+
+.my2{
+    padding-left:0px;
+    padding-right:0px;
+    margin-bottom:5px;
+}
+.heading1{
+    font-size: 28px;
+    color: #ffffff !important;
+    padding: 15px 0px;
+    margin-bottom: 20px;
+    margin-left: 42px;
+}
+.dpdw1 {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    
+}
+.dpdw1 li
+{
+    border-bottom: 1px solid;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color:#0069a0;
+    padding-left: 25px;
+}
+
+.dpdw1 li a {
+    display: block;
+    padding: 8px 16px;
+    text-decoration: none;
+    color:white;
+    font-size:18px;
+    font-weight:400;
+}
+
+.dpdw1 li a:hover {
+   
+    color:#b5e61d ;
+}
+.dpdw2{
+    background-color:#b5e61d;
+}
+.dpdw2 li
+{   
+    border-bottom: 1px solid;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color:#b5e61d;
+}
+.dpdw2 li a:hover{
+    background-color:black;
+    color:#2ea3f2;
+}
+.dpdw2 li a {
+    display: block;
+    text-decoration: none;
+    color:white;
+     background-color:black;
+     padding: 10px 45px;
+}
+
+.class4 {
+    background-image: url('images/pattern.jpg');
+}
+.content{
+    background-color:#2E2E2E;
+    padding-top: 35px;
+    padding-right: 60px;
+    padding-bottom: 60px;
+    padding-left: 50px;
+}
+.content1{
+    background-color:#2E2E2E;
+}
+.bttn1{
+    background-color:#2E2E2E;
+    border-radius:0px;
+    padding: 6px 15px;
+    border-color: white;
+}
+.bttn1:hover{
+    color: #ffffff !important;
+    background: #0097e6 !important;
+    border-color: #0097e6 !important;
+    letter-spacing: 0px;
+    padding-left: 0.7em;
+    padding-right: 2em;
+}
+
+.content2{
+    padding-top:10px;
+    padding-left:10px;
+    padding-bottom:10px;
+    padding-right:0px;
+
+}
+.text1{
+    font-size: 40px;
+    color: #0097eb !important;
+}
