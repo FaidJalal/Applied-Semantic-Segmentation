@@ -3,12 +3,13 @@ from flask import Flask, request, redirect, url_for,jsonify
 from werkzeug.utils import secure_filename
 import json
 import predict
+from flask_cors import CORS
 
-UPLOAD_FOLDER = '/home/faid/Documents/NewPROJ/upload'
-#UPLOAD_FOLDER = '/home/musadiq/Desktop/envs/flaskEnv/upload'
+UPLOAD_FOLDER = '/home/aatirah/Desktop/NewPROJ/upload'
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 
 app = Flask(__name__)
+CORS(app)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 def allowed_file(filename):

@@ -6,6 +6,47 @@ import imutils
 
 from utils import utils, helpers
 from builders import model_builder
+checkpoint_path = 'checkpoints/latest_model_BiSeNet_CamVid.ckpt'
+crop_height = 512
+crop_width = 512
+model = 'BiSeNet'
+dataset = 'CamVid'
+class_names_list, label_values = helpers.get_label_info(os.path.join(dataset, "class_dict.csv"))
+# construct the argument parse and parse the arguments
+#ap = argparse.ArgumentParser()
+classes = 'class_colors/class.txt'
+colors = 'class_colors/colors.txt'
+
+num_classes = len(label_values)
+
+print("\n***** Begin prediction *****")
+print("Dataset -->", dataset)
+print("Model -->", model)
+print("Crop Height -->", crop_height)
+print("Crop Width -->", crop_width)
+print("Num Classes -->", num_classes)
+# print("Image -->", img)
+
+# Initializing network
+config = tf.ConfigProto()
+config.gpu_options.allow_growth = True
+sess=tf.Session(config=config)
+
+net_input = tf.placeholder(tf.float32,shape=[None,None,None,3])
+net_output = tf.placeholder(tf.float32,shape=[None,None,None,num_classes]) 
+
+network, _ = model_builder.build_model(model, net_input=net_input,
+	                                num_classes=num_classes,
+	                                crop_width=crop_width,
+	                                crop_height=crop_height,
+	                                is_training=False)
+
+sess.run(tf.global_variables_initializer())
+
+print('Loading model checkpoint weights')
+saver=tf.train.Saver(max_to_keep=1000)
+saver.restore(sess, checkpoint_path)
+
 
 def pred(img):
 	'''
@@ -18,46 +59,7 @@ def pred(img):
 	parser.add_argument('--dataset', type=str, default="CamVid", required=False, help='The dataset you are using')
 
 	'''
-	checkpoint_path = 'checkpoints/latest_model_BiSeNet_CamVid.ckpt'
-	crop_height = 512
-	crop_width = 512
-	model = 'BiSeNet'
-	dataset = 'CamVid'
-	class_names_list, label_values = helpers.get_label_info(os.path.join(dataset, "class_dict.csv"))
-	# construct the argument parse and parse the arguments
-	#ap = argparse.ArgumentParser()
-	classes = 'class_colors/class.txt'
-	colors = 'class_colors/colors.txt'
 
-	num_classes = len(label_values)
-
-	print("\n***** Begin prediction *****")
-	print("Dataset -->", dataset)
-	print("Model -->", model)
-	print("Crop Height -->", crop_height)
-	print("Crop Width -->", crop_width)
-	print("Num Classes -->", num_classes)
-	print("Image -->", img)
-
-	# Initializing network
-	config = tf.ConfigProto()
-	config.gpu_options.allow_growth = True
-	sess=tf.Session(config=config)
-
-	net_input = tf.placeholder(tf.float32,shape=[None,None,None,3])
-	net_output = tf.placeholder(tf.float32,shape=[None,None,None,num_classes]) 
-
-	network, _ = model_builder.build_model(model, net_input=net_input,
-		                                num_classes=num_classes,
-		                                crop_width=crop_width,
-		                                crop_height=crop_height,
-		                                is_training=False)
-
-	sess.run(tf.global_variables_initializer())
-
-	print('Loading model checkpoint weights')
-	saver=tf.train.Saver(max_to_keep=1000)
-	saver.restore(sess, checkpoint_path)
 
 
 	print("Testing image " + img)
@@ -106,9 +108,10 @@ def pred(img):
 			cv2.FONT_HERSHEY_SIMPLEX, 0.4, tuple(color), 1, cv2.LINE_AA)
 		cv2.rectangle(legend, (100, (i * 15)), (300, (i * 15) + 15),tuple(color), -1)
 
-	#leg=cv2.cvtColor(np.uint8(legend), cv2.COLOR_RGB2BGR)
-	cv2.imwrite("legend.png",legend)
-	return [file_name + '_pred_overlayed.png','legend.png',img]
+	leg=cv2.cvtColor(np.uint8(legend), cv2.COLOR_RGB2BGR)
+	cv2.imwrite("legend.png",leg)
+	
+	return [img,file_name + '_pred_overlayed.png','legend.png']
 '''
 	# show the input and output images
 	# cv2.namedWindow('legend', cv2.WINDOW_NORMAL)
